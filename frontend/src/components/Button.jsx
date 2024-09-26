@@ -2,7 +2,7 @@ import React from 'react'
 
 const Button = ({type,text,onClick,loading}) => {
   return (
-   <button type={type}  className={`btn btn-primary ${loading && 'cursor-not-allowed'}`} onClick={onClick}>
+   <button type={type} disabled={loading}  className={`btn btn-primary `} onClick={onClick}>
     {
         loading && <span className="loading loading-spinner"></span>
     }

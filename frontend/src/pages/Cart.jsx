@@ -112,7 +112,7 @@ const Cart = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {cart?.items?.filter((item) => (
+                        {cart?.items?.map((item) => (
                            item.productId &&  <CartItem 
                            key={item.productId._id} 
                            item={item} 

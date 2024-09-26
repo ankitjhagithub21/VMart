@@ -27,7 +27,7 @@ const CartItem = ({ item, handleRemoveFromCart, handleIncrementQuantity, handleD
         </div>
       </td>
       <td>{item.productId.title}</td>
-      <td>&#8377; {item.productId.price}</td>
+      <td>&#8377; {item.price}</td>
       <td>
         <div className="flex gap-3 items-center">
           <button
@@ -45,7 +45,7 @@ const CartItem = ({ item, handleRemoveFromCart, handleIncrementQuantity, handleD
           </button>
         </div>
       </td>
-      <td>&#8377; {item.productId.price * quantity}</td>
+      <td>&#8377; {item.price * quantity}</td>
       <td>
         <button
           className="btn btn-square btn-outline btn-sm"
