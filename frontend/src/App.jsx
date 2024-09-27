@@ -12,6 +12,7 @@ import ProductDetails from './pages/ProductDetails'
 import { useSelector } from 'react-redux'
 import Dashboard from './pages/Dashboard'
 import Cart from './pages/Cart'
+import "./App.css"
 
 const App = () => {
   useFetchAuthUser()

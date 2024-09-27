@@ -7,15 +7,15 @@ const Product = ({product}) => {
 
  
     return (
-        <div className="card bg-base-100 w-96 shadow-xl cursor-pointer" onClick={()=>navigate(`/products/${_id}`)}>
-            <figure>
+        <div className="bg-base-100 shadow-xl product cursor-pointer overflow-hidden rounded-lg" onClick={()=>navigate(`/products/${_id}`)}>
+            <div>
                 <img
                     src={image}
                     alt={title} 
                     loading='lazy'
-                    className='hover:scale-105 transition'
+                    className=' object-cover w-full h-62'
                     />
-            </figure>
+            </div>
             <div className="card-body">
                 <h2 className="card-title">
                   
