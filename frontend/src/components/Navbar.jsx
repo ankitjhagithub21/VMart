@@ -23,8 +23,8 @@ const Navbar = () => {
         }
     }
     return (
-        <nav>
-            <div className="navbar bg-base-100 container mx-auto">
+        <nav className='w-full fixed top-0 z-50 '>
+            <div className="navbar bg-base-100">
                 <div className="flex-1">
                     <Link className="btn btn-ghost text-xl" to={"/"}>VMart</Link>
                 </div>

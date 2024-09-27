@@ -1,20 +1,22 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
     return (
-        <div className="drawer z-50">
-            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content">
+        <div className="drawer lg:drawer-open z-10">
+            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content ml-5">
                 {/* Page content here */}
-                <label htmlFor="my-drawer" className="btn btn-primary drawer-button">Open Menu</label>
+                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button mt-24 lg:hidden">
+                    Menu
+                </label>
             </div>
             <div className="drawer-side">
-                <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex flex-col gap-5 justify-center">
+                <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
+                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex flex-col justify-center">
                     {/* Sidebar content here */}
-                    <NavLink to={"/admin/products"}>Product List</NavLink>
-                    <NavLink to={"/admin/add-product"}>Add Product</NavLink>
+                    <li><Link to={"/admin/products"}>Products</Link></li>
+                    <li><Link to={"/admin/add-product"}>Add Product</Link></li>
                 </ul>
             </div>
         </div>

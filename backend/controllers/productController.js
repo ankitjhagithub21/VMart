@@ -7,8 +7,6 @@ const isAdmin = async(userId) =>{
         if(!user || !user.isAdmin){
             return false;
         }
-        
-    
     return true;
 
 }

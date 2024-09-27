@@ -9,7 +9,7 @@ const Products = () => {
     }
     return (
         <section>
-            <div className='max-w-7xl mx-auto px-5 grid lg:grid-cols-4 md:grid-cols-2 gap-10 grid-cols-1 my-12'>
+            <div className='max-w-7xl my-24 mx-auto px-5 grid lg:grid-cols-4 md:grid-cols-2 gap-10 grid-cols-1'>
                 {
                     products.map((product) => {
                         return <Product key={product._id} product={product} />

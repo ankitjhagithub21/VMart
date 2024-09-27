@@ -9,7 +9,7 @@ const AddProduct = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
-  const [image, setImage] = useState(null); 
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleAddProduct = async (e) => {
@@ -21,13 +21,13 @@ const AddProduct = () => {
     formData.append('description', description);
     formData.append('price', price);
     formData.append('category', category);
-    formData.append('image', image); 
+    formData.append('image', image);
 
     setLoading(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/products`, {
         method: 'POST',
-        body: formData, 
+        body: formData,
         credentials: 'include',
       });
 
@@ -51,26 +51,28 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto border border-primary p-5 my-24 rounded-xl">
-      <FormHeading text={"Add New Product"} />
-      <form className="flex flex-col gap-3" onSubmit={handleAddProduct}>
-        <Input type={"text"} placeholder={"Enter title"} name={"title"} value={title} setValue={setTitle} />
-        <Input type={"text"} placeholder={"Enter description"} name={"description"} value={description} setValue={setDescription} />
-        <Input type={"text"} placeholder={"Enter category"} name={"category"} value={category} setValue={setCategory} />
-        <Input type={"number"} placeholder={"Enter price"} name={"price"} value={price} setValue={setPrice} />
-        
-        {/* File Input for Image */}
-        <input 
-          type="file" 
-          name="image" 
-          onChange={(e) => setImage(e.target.files[0])} // Get the selected file
-          accept="image/*"
-        className='file-input w-full'
-        />
-        
-        <Button type={"submit"} text={"Add product"} loading={loading} />
-      </form>
-    </div>
+    <section className='h-full flex items-center justify-center'>
+      <div className=" border border-primary p-5 max-w-xl w-full rounded-xl">
+        <FormHeading text={"Add New Product"} />
+        <form className="flex flex-col gap-3" onSubmit={handleAddProduct}>
+          <Input type={"text"} placeholder={"Enter title"} name={"title"} value={title} setValue={setTitle} />
+          <Input type={"text"} placeholder={"Enter description"} name={"description"} value={description} setValue={setDescription} />
+          <Input type={"text"} placeholder={"Enter category"} name={"category"} value={category} setValue={setCategory} />
+          <Input type={"number"} placeholder={"Enter price"} name={"price"} value={price} setValue={setPrice} />
+
+          {/* File Input for Image */}
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => setImage(e.target.files[0])} // Get the selected file
+            accept="image/*"
+            className='file-input w-full'
+          />
+
+          <Button type={"submit"} text={"Add product"} loading={loading} />
+        </form>
+      </div>
+    </section>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import {Link} from 'react-router-dom'
 import useFetchProducts from '../hooks/useFetchProducts'
 import Loading from './Loading'
 import { toast } from 'react-toastify'
@@ -31,7 +31,8 @@ const ProductList = () => {
     }
 
     return (
-        <div className="overflow-x-auto">
+        <div className='w-full'>
+            <h2 className='text-3xl mb-5'>Product List</h2>
             <table className="table">
                 {/* head */}
                 <thead>
