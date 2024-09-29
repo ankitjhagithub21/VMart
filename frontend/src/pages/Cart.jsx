@@ -25,7 +25,7 @@ const Cart = () => {
             });
             const data = await res.json();
             if (data.success) {
-                toast.success("Quantity increased.");
+               
                 dispatch(setCart(data.cart));
             } else {
                 toast.error(data.message);
@@ -49,7 +49,7 @@ const Cart = () => {
             });
             const data = await res.json();
             if (data.success) {
-                toast.success("Quantity decreased.");
+               
                 dispatch(setCart(data.cart));
             } else {
                 toast.error(data.message);
@@ -97,7 +97,7 @@ const Cart = () => {
     }
 
     return (
-        <div className='container mx-auto my-12 px-5'>
+        <div className='container mx-auto my-24 px-5'>
             <h1 className='text-3xl mb-5'>Your Cart</h1>
             <div className="overflow-x-auto">
                 <table className="table">

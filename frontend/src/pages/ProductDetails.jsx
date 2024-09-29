@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Loading from '../components/Loading';
@@ -12,7 +12,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
+    
     const dispatch = useDispatch();
 
     // Fetch product details when the component mounts
@@ -40,11 +40,7 @@ const ProductDetails = () => {
         fetchProduct();
     }, [productId]);
 
-    // Navigate back to the previous page
-    const onBackButtonClick = () => {
-        navigate(-1);
-    };
-
+    
     // Add product to the cart
     const handleAddToCart = async () => {
         if (!user) return toast.error('You are not logged in.');
@@ -88,7 +84,7 @@ const ProductDetails = () => {
     // Render product details
     return (
         <section className='px-5 py-12'>
-            <Button type="button" text="Back" onClick={onBackButtonClick} />
+            
             <div className="max-w-7xl mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap items-center">
                     <img
