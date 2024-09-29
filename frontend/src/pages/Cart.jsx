@@ -25,7 +25,6 @@ const Cart = () => {
             });
             const data = await res.json();
             if (data.success) {
-               
                 dispatch(setCart(data.cart));
             } else {
                 toast.error(data.message);
@@ -49,7 +48,6 @@ const Cart = () => {
             });
             const data = await res.json();
             if (data.success) {
-               
                 dispatch(setCart(data.cart));
             } else {
                 toast.error(data.message);
@@ -96,6 +94,10 @@ const Cart = () => {
         );
     }
 
+    // Calculate total quantity and total price
+    const totalQuantity = cart.items.reduce((acc, item) => acc + item.quantity, 0);
+    const totalPrice = cart.items.reduce((acc, item) => acc + item.quantity * item.productId.price, 0);
+
     return (
         <div className='container mx-auto my-24 px-5'>
             <h1 className='text-3xl mb-5'>Your Cart</h1>
@@ -123,6 +125,15 @@ const Cart = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Cart Summary */}
+            <div className='mt-10 p-5 border-t-2 border-gray-200'>
+                <h2 className='text-2xl font-semibold'>Cart Summary</h2>
+                <div className='flex justify-between mt-4'>
+                    <p>Total Items: <span className='font-bold'>{totalQuantity}</span></p>
+                    <p>Total Price: <span className='font-bold'>&#8377; {totalPrice.toFixed(2)}</span></p>
+                </div>
             </div>
         </div>
     );
