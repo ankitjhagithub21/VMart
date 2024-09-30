@@ -4,6 +4,9 @@ import useFetchCart from '../hooks/useFetchCart';
 import { toast } from 'react-toastify'; 
 import { setCart } from '../redux/slices/cartSlice'; 
 import CartItem from '../components/CartItem';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const Cart = () => {
     useFetchCart();
@@ -11,6 +14,34 @@ const Cart = () => {
 
     const { loading, cart } = useSelector(state => state.cart);
     const { user } = useSelector(state => state.auth);
+
+
+    const handleCheckout = async () => {
+        const stripe = await stripePromise;
+
+        try {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/cart/create-checkout-session`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    items: cart.items,  
+                }),
+            });
+
+            const { id } = await res.json();
+
+            const result = await stripe.redirectToCheckout({ sessionId: id });
+            if (result.error) {
+                toast.error(result.error.message);
+            }
+        } catch (error) {
+            console.error('Error during checkout:', error);
+            toast.error('Failed to proceed to checkout.');
+        }
+    };
 
     // Function to handle increment quantity via increment route
     const handleIncrementQuantity = async (productId) => {
@@ -132,7 +163,17 @@ const Cart = () => {
                 <h2 className='text-2xl font-semibold'>Cart Summary</h2>
                 <div className='flex justify-between mt-4'>
                     <p>Total Items: <span className='font-bold'>{totalQuantity}</span></p>
-                    <p>Total Price: <span className='font-bold'>&#8377; {totalPrice.toFixed(2)}</span></p>
+                    <p>Total Price: <span className='font-bold'>${totalPrice.toFixed(2)}</span></p>
+                </div>
+
+                {/* Checkout Button */}
+                <div className='mt-6'>
+                    <button
+                        className='bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-500 transition-all'
+                        onClick={handleCheckout}
+                    >
+                        Proceed to Checkout
+                    </button>
                 </div>
             </div>
         </div>

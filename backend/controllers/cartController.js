@@ -1,5 +1,8 @@
 const Cart = require("../models/cart");
 const Product = require("../models/product");
+const Stripe = require('stripe');
+
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Add a product to the cart or update its quantity
 const addToCart = async (req, res) => {
@@ -206,6 +209,38 @@ const decrementQuantity = async (req, res) => {
     }
 };
 
+const createCheckoutSession = async (req, res) => {
+    const { items } = req.body;  
+
+    const line_items = items.map(item => ({
+        price_data: {
+            currency: 'inr',  
+            product_data: {
+                name: item.productId.title,
+                
+            },
+            unit_amount: Math.round(item.productId.price * 100),  
+        },
+        quantity: item.quantity,
+    }));
+
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items,
+            mode: 'payment',
+            success_url: `${process.env.ORIGIN}/success`,  
+            cancel_url: `${process.env.ORIGIN}/cancel`,   
+        });
+
+        res.json({ id: session.id });
+    } catch (error) {
+        console.error('Error creating Stripe session:', error);
+        res.status(500).json({ error: 'Failed to create checkout session' });
+    }
+}
+
+
 // Get the cart for the current user
 const getCart = async (req, res) => {
     try {
@@ -228,10 +263,13 @@ const getCart = async (req, res) => {
     }
 };
 
+
 module.exports = {
     addToCart,
     removeFromCart,
     incrementQuantity,
     decrementQuantity,
-    getCart
+    getCart,
+    createCheckoutSession
 };
+
